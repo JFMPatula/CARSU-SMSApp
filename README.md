@@ -65,5 +65,5 @@ Numbers like 09171234567 are converted to +639171234567 automatically.
 | Member                  | Responsibility                    |
 | ----------------------- | --------------------------------- |
 | Jean Faith Marie Patula | Backend (models, services, views) |
-| Francine Clair Jamilo   | Frontend (templates, forms)       |
+| Francine Claire Jamilo  | Frontend (templates, forms)       |
 | Stanley James Apal      | README, testing, demo video       |
