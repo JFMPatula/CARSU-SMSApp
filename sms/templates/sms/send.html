@@ -1,0 +1,47 @@
+{% extends "sms/base.html" %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <small id="count">0 characters &middot; 1 SMS</small>
+
+  <div class="preview">
+    <div class="preview-label">Preview</div>
+    <div class="bubble empty" id="preview">Your message will appear here&hellip;</div>
+  </div>
+
+  <br>
+  <button type="submit">Send SMS</button>
+</form>
+<style>
+  .preview{margin-top:.6rem;border:1px solid #ddd;border-radius:10px;padding:.75rem;background:#f7f7f7;max-width:360px}
+  .preview-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:.4rem}
+  .bubble{background:#e5e5ea;border-radius:16px;padding:.6rem .8rem;white-space:pre-wrap;word-break:break-word;min-height:2.4rem;font-size:.92rem}
+  .bubble.empty{color:#999;font-style:italic}
+  #count.warn{color:#b00020}
+</style>
+<script>
+  const box = document.getElementById("msg");
+  const count = document.getElementById("count");
+  const preview = document.getElementById("preview");
+
+  function update() {
+    const text = box.value;
+    const len = text.length;
+    const segments = Math.max(1, Math.ceil(len / 160));
+    count.textContent = len + " characters \u00b7 " + segments + " SMS";
+    count.classList.toggle("warn", len > 480);
+
+    if (text.trim()) {
+      preview.textContent = text;
+      preview.classList.remove("empty");
+    } else {
+      preview.textContent = "Your message will appear here\u2026";
+      preview.classList.add("empty");
+    }
+  }
+
+  box.addEventListener("input", update);
+  update();
+</script>
+{% endblock %}

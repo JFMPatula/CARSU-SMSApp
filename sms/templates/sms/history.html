@@ -1,0 +1,15 @@
+{% extends "sms/base.html" %}
+{% block content %}
+<table>
+  <tr><th>Time</th><th>To</th><th>Message</th><th>Status</th></tr>
+  {% for i in items %}
+  <tr>
+    <td>{{ i.created_at|date:"M d, H:i" }}</td>
+    <td>{{ i.recipient }}</td>
+    <td>{{ i.body|truncatechars:40 }}</td>
+    <td>{{ i.status }}{% if i.error %} <small>({{ i.error|truncatechars:40 }})</small>{% endif %}</td>
+  </tr>
+  {% empty %}<tr><td colspan="4">No messages yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

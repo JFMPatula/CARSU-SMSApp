@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Django SMS Sender</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:640px;margin:2rem auto;padding:0 1rem}
+    nav a{margin-right:1rem}
+    input,textarea{width:100%;padding:.5rem;margin:.25rem 0 1rem;box-sizing:border-box}
+    button{padding:.6rem 1.2rem;cursor:pointer}
+    .msg{padding:.6rem;margin:.5rem 0;border-radius:6px}
+    .success{background:#d9f7e0}.error{background:#fbd9d9}
+    table{width:100%;border-collapse:collapse}
+    td,th{border-bottom:1px solid #ddd;padding:.4rem;text-align:left;font-size:.9rem}
+    .errorlist{color:#b00020;padding-left:1rem}
+  </style>
+</head>
+<body>
+  <h1>SMS Sender</h1>
+  <nav><a href="{% url 'sms:send' %}">Send</a><a href="{% url 'sms:history' %}">History</a></nav>
+  {% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>
